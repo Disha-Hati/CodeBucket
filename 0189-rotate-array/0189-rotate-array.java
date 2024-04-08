@@ -2,7 +2,7 @@ class Solution {
     void reverse(int[] arr,int s,int e){
         int start=s;
         int end=e;
-        while(start<end){
+        while(start<=end){
             int temp=arr[start];
             arr[start]=arr[end];
             arr[end]=temp;

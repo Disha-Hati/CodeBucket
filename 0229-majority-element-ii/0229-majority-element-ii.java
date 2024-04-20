@@ -12,7 +12,9 @@ class Solution {
             }
         }
         
-        for(int key:map.keySet()){
+        Set<Integer> keys=map.keySet();
+        
+        for(int key:keys){
             if(map.get(key)>(nums.length)/3){
                 ans.add(key);
             }

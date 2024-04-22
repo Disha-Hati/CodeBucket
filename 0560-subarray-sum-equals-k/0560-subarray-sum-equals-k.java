@@ -10,7 +10,7 @@ class Solution {
         for(int i=0;i<nums.length;i++){
             sum+=nums[i]; //prefix sum
             
-            if(map.containsKey(sum-k)){
+            if(map.containsKey(sum-k)){  //sum(j)-k
                 ans+=map.get(sum-k);
             }
             

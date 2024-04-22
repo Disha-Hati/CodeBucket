@@ -1,7 +1,6 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
-        List<Integer> ans=new ArrayList<Integer>();
-        
+        List<Integer> ans=new ArrayList<>();
         HashMap<Integer,Integer> map=new HashMap<>();
         
         for(int i=0;i<nums.length;i++){
@@ -19,7 +18,6 @@ class Solution {
                 ans.add(key);
             }
         }
-        
         
         return ans;
     }

@@ -11,9 +11,10 @@
 class Solution {
     
     public ListNode reverse(ListNode head){
-        if(head==null||head.next==null){
+         if(head==null||head.next==null){
             return head;
         }
+        
         ListNode prev=head;
         ListNode curr=head.next;
         
@@ -29,9 +30,14 @@ class Solution {
         head.next=null;
         return prev;
     }
+    
     public ListNode findMid(ListNode head){
-        ListNode turtle=head;
+        if(head==null||head.next==null){
+            return head;
+        }
+        
         ListNode hare=head;
+        ListNode turtle=head;
         
         while(hare.next!=null && hare.next.next!=null){
             hare=hare.next.next;
@@ -40,21 +46,21 @@ class Solution {
         
         return turtle;
     }
-    
-    
     public boolean isPalindrome(ListNode head) {
         if(head==null||head.next==null){
             return true;
         }
         
-        ListNode midnode=findMid(head);
-        ListNode secondHead=reverse(midnode.next);
+        ListNode firstMid=findMid(head);
+        ListNode secondHead=reverse(firstMid.next);
+        
         ListNode firstHead=head;
         
         while(secondHead!=null){
             if(firstHead.val!=secondHead.val){
                 return false;
             }
+            
             firstHead=firstHead.next;
             secondHead=secondHead.next;
         }

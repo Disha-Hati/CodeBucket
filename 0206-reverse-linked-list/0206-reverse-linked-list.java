@@ -21,6 +21,7 @@ class Solution {
             ListNode next=curr.next;
             
             curr.next=prev;
+            
             prev=curr;
             curr=next;
         }
@@ -28,6 +29,5 @@ class Solution {
         head.next=null;
         
         return prev;
-        
     }
 }

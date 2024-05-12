@@ -28,11 +28,9 @@ public class Solution {
                     curr=curr.next;
                     turtle=turtle.next;
                 }
-                
                 return curr;
             }
         }
-        
         return null;
         
     }

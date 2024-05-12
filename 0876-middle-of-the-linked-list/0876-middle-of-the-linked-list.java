@@ -10,9 +10,10 @@
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        if(head==null||head.next==null){
+        if(head==null || head.next==null){
             return head;
         }
+        
         ListNode hare=head;
         ListNode turtle=head;
         

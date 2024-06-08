@@ -6,7 +6,7 @@ class Solution {
         int index=nums.length-1;
         
         while(left<=right){
-            if(Math.abs(nums[left])<Math.abs(nums[right])){
+            if(nums[left]*nums[left]<nums[right]*nums[right]){
                 result[index--]=nums[right]*nums[right];
                 right--;
             }else{

@@ -16,6 +16,6 @@ class Solution {
             }
         }
         // At the end of loop, start == end and pointing to the smallest number
-        return nums[start];
+        return nums[end];
     }
 }

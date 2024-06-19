@@ -17,9 +17,9 @@ class Solution {
     
      private int getMax(int[] piles) {
         int max = piles[0];
-        for (int pile : piles) {
-            if (pile > max) {
-                max = pile;
+        for (int i=1;i<piles.length;i++) {
+            if (piles[i] > max) {
+                max = piles[i];
             }
         }
         return max;

@@ -27,8 +27,8 @@ class Solution {
     
     private int hoursNeeded(int[] piles, int k) {
         int hours = 0;
-        for (int pile : piles) {
-            hours += (pile + k - 1) / k; // This is equivalent to ceil(pile / k)
+        for (int i=0;i<piles.length;i++) {
+            hours += (piles[i] + k - 1) / k; // This is equivalent to ceil(pile / k)
         }
         return hours;
     }

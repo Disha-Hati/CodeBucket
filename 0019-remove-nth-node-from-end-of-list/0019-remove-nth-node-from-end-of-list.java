@@ -13,24 +13,24 @@ class Solution {
         int size=0;
         ListNode curr=head;
         while(curr!=null){
-            size++;
             curr=curr.next;
+            size++;
         }
         
-        if (n==size){
-            return head.next;
-        }
+        if(size==n) return head.next; //removing head
         
-        int prevToN=size-n;
-        ListNode temp=head;
+        int prevIn=size-n;
+        
+        ListNode prevNode=head;
         
         int i=1;
-        while(i<prevToN){
-            temp=temp.next;
+        
+        while(i<prevIn){
+            prevNode=prevNode.next;
             i++;
         }
         
-        temp.next=temp.next.next;
+        prevNode.next=prevNode.next.next;
         
         return head;
     }

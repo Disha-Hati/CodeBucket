@@ -21,9 +21,8 @@ public class Solution {
         while ( headB != null ) {
             if ( nodeVisit.contains(headB) ) {
                 return headB;
-            } else {
+            } 
                 headB = headB.next;
-            }
         }
         return null;
     }

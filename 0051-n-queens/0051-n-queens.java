@@ -1,46 +1,71 @@
 class Solution {
     public List<List<String>> solveNQueens(int n) {
-         char[][] board = new char[n][n];
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                board[i][j] = '.';
-        List<List<String>> res = new ArrayList<List<String>>();
-        dfs(board, 0, res);
-        return res;
+        List<List<String>> boardAns=new ArrayList<>();
+        
+        char[][] board=new char[n][n];
+        
+        helper(boardAns,board,0);
+        
+        return boardAns;
     }
     
-    private void dfs(char[][] board, int colIndex, List<List<String>> res) {
-        if(colIndex == board.length) {
-            res.add(construct(board));
+    public void helper(List<List<String>> boardAns,char[][] board,int col){
+        if(col==board.length){
+            saveBoard(board,boardAns);
             return;
         }
         
-        for(int i = 0; i < board.length; i++) {
-            if(validate(board, i, colIndex)) {
-                board[i][colIndex] = 'Q';
-                dfs(board, colIndex + 1, res);
-                board[i][colIndex] = '.';
+        for(int row=0;row<board.length;row++){
+            if(isSafe(row,col,board)){
+                board[row][col]='Q';
+                helper(boardAns,board,col+1);
+                board[row][col]='.';
             }
         }
     }
     
-    private boolean validate(char[][] board, int x, int y) {
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < y; j++) {
-                if(board[i][j] == 'Q' && (x + j == y + i || x + y == i + j || x == i))
-                    return false;
-            }
+    public boolean isSafe(int row,int col,char[][] board ){
+        //horizontal
+        for(int i=0;i<board.length;i++){
+            if(board[row][i]=='Q') return false;
+        }
+        
+        //vertical
+        for(int i=0;i<board.length;i++){
+            if(board[i][col]=='Q') return false;
+        }
+        
+        //upper-left
+        for(int r=row,c=col; r>=0 && c>=0 ; r--,c--){
+            if(board[r][c]=='Q') return false;
+        }
+        
+        //botton-left
+        for(int r=row,c=col; r<board.length && c>=0 ; r++,c--){
+            if(board[r][c]=='Q') return false;
         }
         
         return true;
     }
     
-    private List<String> construct(char[][] board) {
-        List<String> res = new LinkedList<String>();
-        for(int i = 0; i < board.length; i++) {
-            String s = new String(board[i]);
-            res.add(s);
+    public void saveBoard(char[][] board,List<List<String>> boardAns){
+        String row="";
+        List<String> newBoard=new ArrayList<>();
+        
+        for(int i=0;i<board.length;i++){
+            row="";
+            for(int j=0;j<board[0].length;j++){
+                if(board[i][j]=='Q'){
+                    row+='Q';
+                }else{
+                    row+='.';
+                }
+                
+            }
+            
+            newBoard.add(row);
         }
-        return res;
+        
+        boardAns.add(newBoard);
     }
 }

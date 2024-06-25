@@ -54,7 +54,7 @@ class Solution {
         
         for(int i=0;i<board.length;i++){
             row="";
-            for(int j=0;j<board[0].length;j++){
+            for(int j=0;j<board[i].length;j++){
                 if(board[i][j]=='Q'){
                     row+='Q';
                 }else{

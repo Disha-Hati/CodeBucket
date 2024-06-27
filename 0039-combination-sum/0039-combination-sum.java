@@ -9,9 +9,11 @@ class Solution {
     
     public void combi(int index,int[] candidates, int target,List<List<Integer>> list,List<Integer> ans){
         if(index==candidates.length){
-            if(target==0){
-                list.add(new ArrayList<>(ans));
-            }
+            return;
+        }
+        
+        if(target==0){
+            list.add(new ArrayList<>(ans));
             return;
         }
         

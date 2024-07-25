@@ -1,9 +1,8 @@
 class MinStack {
    private long minEle;
-    private Stack<Long> s;
+    private Stack<Long> s = new Stack<>();
 
     public MinStack() {
-        s = new Stack<>();
     }
 
     public void push(int val) {

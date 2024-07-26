@@ -18,12 +18,10 @@ class Solution {
         
         int[] water=new int[height.length];
         for(int i=0;i<height.length;i++){
-            water[i]=Math.min(maxL[i],maxR[i])-height[i];
+            total+=Math.min(maxL[i],maxR[i])-height[i];
         }
         
-        for(int i=0;i<water.length;i++){
-            total+=water[i];
-        }
+        
         
         
         return total;

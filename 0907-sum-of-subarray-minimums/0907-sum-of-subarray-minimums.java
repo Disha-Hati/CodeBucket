@@ -11,15 +11,12 @@ class Solution {
 //             }
 //         }
         
-//         return sum;
-        
-        
+//         return sum;        
         int sum=0, mod = (int)1e9 +7;
         
         int[] lse=nsl(arr);
         int[] rse=nsr(arr);
 
-        
         for(int i=0;i<arr.length;i++){
             int left=i-lse[i];
             int right=rse[i]-i;
@@ -29,7 +26,6 @@ class Solution {
             
             sum = (int)((sum + contribution) % mod);
         }
-        
         return sum;
     }
     
@@ -38,7 +34,7 @@ class Solution {
         Stack<Integer> s = new Stack<>();
         
         for (int i = 0; i < arr.length; i++) {
-            while (!s.isEmpty() && arr[s.peek()] >= arr[i]) {
+            while (!s.isEmpty() && arr[s.peek()] > arr[i]) {
                 s.pop();
             }
             
@@ -50,7 +46,6 @@ class Solution {
             
             s.push(i);
         }
-        
         return lse;
     }
     
@@ -59,7 +54,7 @@ class Solution {
         Stack<Integer> s=new Stack<>();
         
         for(int i=arr.length-1;i>=0;i--){
-            while(!s.isEmpty() && arr[s.peek()]>arr[i]){
+            while(!s.isEmpty() && arr[s.peek()]>=arr[i]){
                 s.pop();
             }
             

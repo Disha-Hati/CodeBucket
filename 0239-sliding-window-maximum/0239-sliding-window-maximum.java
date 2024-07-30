@@ -1,38 +1,27 @@
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-         int ans[] = new int[nums.length - k + 1];
-        Deque<Integer> q = new LinkedList<>();
+        int[] ans=new int[nums.length-k+1];
+        int x=0;
         
-        int i = 0;
-        int j = 0;
+        Deque<Integer> dq=new LinkedList<>();
         
-        while(j < nums.length){
-            // calculation
-            if(q.size() == 0){
-                q.add(nums[j]);
+        for(int i=0;i<nums.length;i++){
+            
+            //Maintaining Window Size
+            if(!dq.isEmpty() && dq.peekFirst()<i-k+1){
+                dq.removeFirst();
             }
-            else{
-                while(q.size() > 0 && q.peekLast() < nums[j]){
-                    q.removeLast();
-                }
-                q.add(nums[j]);
-            }
-            // now move j pointer
-            if(j - i + 1 < k) j++;
-            // if we hit the window size
-            else if(j - i + 1 == k){
-                // answer -> calculation;
-                ans[i] = q.peek();
-                // slide the window
-                // calculation
-                if(nums[i] == q.peek()){
-                    q.removeFirst();
-                }
-                // now slide the pointer
-                i++;
-                j++;
-            }
+            
+            //removing the lesser elements before the current element
+            while(!dq.isEmpty() && nums[dq.peekLast()]<nums[i])  dq.removeLast();
+            
+            dq.addLast(i); // pushing the index to Queue
+            
+            if(i>=k-1) ans[x++]=nums[dq.peekFirst()];
+            
+            
         }
+        
         return ans;
     }
 }

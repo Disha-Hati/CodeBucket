@@ -1,14 +1,21 @@
 class Solution {
-    public int totalFruit(int[] tree) {
-        Map<Integer, Integer> count = new HashMap<>();
-        int i = 0, j;
-        for (j = 0; j < tree.length; ++j) {
-            count.put(tree[j], count.getOrDefault(tree[j], 0) + 1);
-            if (count.size() > 2) {
-                count.put(tree[i], count.get(tree[i]) - 1);
-                count.remove(tree[i++], 0);
+    public int totalFruit(int[] fruits) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        int ans=0;
+        
+        int l=0,r=0;
+        
+        while(r<fruits.length){
+            map.put(fruits[r],map.getOrDefault(fruits[r],0)+1);
+            if(map.size()>2){
+                map.put(fruits[l],map.get(fruits[l])-1);
+                map.remove(fruits[l],0);
+                l++;
             }
+            ans=Math.max(ans,r-l+1);
+            r++;
         }
-        return j - i;
+        
+        return ans;
     }
 }

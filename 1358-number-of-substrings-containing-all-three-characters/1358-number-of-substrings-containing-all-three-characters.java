@@ -1,26 +1,23 @@
 class Solution {
     public int numberOfSubstrings(String s) {
-       int count = 0;
-        int left = 0;
-        HashMap<Character, Integer> map = new HashMap<>();
+        int count=0;
+        HashMap<Character,Integer> map=new HashMap<>();
+        int l=0,r=0;
         
-        for (int right = 0; right < s.length(); right++) {
-            char rightChar = s.charAt(right);
-            map.put(rightChar, map.getOrDefault(rightChar, 0) + 1);
+        while(r<s.length()){
+            map.put(s.charAt(r),map.getOrDefault(s.charAt(r),0)+1);
             
-            // Check if the current window contains at least one of each 'a', 'b', and 'c'
-            while (map.size() == 3) {
-                // All substrings starting from current `left` to `right` are valid
-                count += s.length() - right;
+            while(map.size()==3){
+                count+=s.length()-r;
                 
-                char leftChar = s.charAt(left);
-                map.put(leftChar, map.get(leftChar) - 1);
-                if (map.get(leftChar) == 0) {
-                    map.remove(leftChar);
-                }
-                left++;
+                map.put(s.charAt(l),map.get(s.charAt(l))-1);
+                map.remove(s.charAt(l),0);
+                l++;
             }
+            
+            r++;
         }
+        
         
         return count;
     }

@@ -1,20 +1,35 @@
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
-        int n = nums.length;
-        int[] prefix = new int[n + 1];
-        prefix[0] = 1;
-        int count = 0, odd = 0;
+        return countAtMost(nums,k)-countAtMost(nums,k-1);
+    }
+    
+    public int countAtMost(int[] nums,int k){
+        int l=0,r=0;
+        int sum=0;
+        int ans=0;
         
-        for (int i = 0; i < n; i++) {
-            if (nums[i] % 2 != 0) {
-                odd++;
+        while(r<nums.length){
+            if(nums[r]%2==0){
+                sum+=0;
+            }else{
+                sum+=1;
             }
-            if (odd >= k) {
-                count += prefix[odd - k];
+            while(sum>k){
+                if(nums[l]%2!=0) sum-=1;
+                l++;
             }
-            prefix[odd]++;
+            
+            
+            
+            ans+=r-l+1;
+            r++;
         }
         
-        return count;
+        
+        
+        
+        
+        
+        return ans;
     }
 }

@@ -1,23 +1,27 @@
 class Solution {
     public int characterReplacement(String s, int k) {
-         int[] count = new int[26]; // Array to keep track of character counts
-        int maxCount = 0; // Maximum count of a single character in the current window
-        int maxLength = 0; // Maximum length of the substring found
-        int left = 0; // Left pointer for the sliding window
-
-        for (int right = 0; right < s.length(); right++) {
-            count[s.charAt(right) - 'A']++; // Increment count of the current character
-            maxCount = Math.max(maxCount, count[s.charAt(right) - 'A']); // Update maxCount
-
-            // Check if the current window is valid
-            while (right - left + 1 - maxCount > k) {
-                count[s.charAt(left) - 'A']--; // Decrement count of the leftmost character
-                left++; // Shrink the window from the left
+        int l=0,r=0;
+        
+        int[] count=new int[26]; //to keep count of each character
+        int maxCount=0;  //maxFrequency
+        int ans=0;
+        
+        while(r<s.length()){
+            count[s.charAt(r)-'A']++; //updating count of thet char at r
+            
+            maxCount=Math.max(maxCount,count[s.charAt(r)-'A']);
+            
+            if(r-l+1-maxCount>k){
+                count[s.charAt(l)-'A']--; //decreasing count of that character
+                l++;  //shrinking window
             }
-
-            maxLength = Math.max(maxLength, right - left + 1); // Update maxLength
+            ans=Math.max(ans,r-l+1);
+            r++;
         }
-
-        return maxLength;
+        
+        
+        
+        
+        return ans;
     }
 }

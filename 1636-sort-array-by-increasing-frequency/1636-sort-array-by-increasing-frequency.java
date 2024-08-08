@@ -25,12 +25,10 @@ class Solution {
         int i = nums.length-1; // Start filling from the beginning
         
         while (!maxheap.isEmpty()) {
-            Map.Entry<Integer, Integer> entry = maxheap.poll(); // Remove the top element from the heap
-            int frequency = entry.getValue();
-            int value = entry.getKey();
-            for (int j = 0; j < frequency; j++) {
-                ans[i--] = value; // Fill from the beginning of the array
-            }
+           for(int j=0;j<maxheap.peek().getValue();j++){
+               ans[i--]=maxheap.peek().getKey();
+           }
+            maxheap.poll();
         }
         
         return ans;

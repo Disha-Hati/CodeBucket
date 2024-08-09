@@ -1,23 +1,19 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        int i=0;
-        while(i<nums.length){
-            int correct=nums[i]-1;
-            if(nums[i]!=nums[correct]){
-                int temp=nums[i];
-                nums[i]=nums[correct];
-                nums[correct]=temp;
-            }else{
-                i++;
-            }
-        }
+        int hare=nums[0];
+        int turtle=nums[0];
         
-        for(int j=0;j<nums.length;j++){
-            if(nums[j]!=j+1){
-                return nums[j];
-            }
-        }
+        do{
+           hare = nums[nums[hare]]; // Move hare by 2 steps
+        turtle = nums[turtle];    // Move turtle by 1 step
+        } while (hare != turtle);
         
-        return -1;
+        hare = nums[0]; // Reset hare to the start
+        while (hare != turtle) {
+            hare = nums[hare];
+            turtle = nums[turtle];
+        }
+    
+    return hare;
     }
 }

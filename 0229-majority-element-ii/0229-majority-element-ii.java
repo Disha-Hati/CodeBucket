@@ -3,21 +3,17 @@ class Solution {
         List<Integer> ans=new ArrayList<>();
         HashMap<Integer,Integer> map=new HashMap<>();
         
-        for(int i=0;i<nums.length;i++){
-            if(map.containsKey(nums[i])){
-                map.put(nums[i],map.get(nums[i])+1);
-            }else{
-                map.put(nums[i],1);
+        for(int val:nums){
+            map.put(val,map.getOrDefault(val,0)+1);
+        }
+        
+        for(Map.Entry<Integer,Integer> e:map.entrySet()){
+            if(e.getValue()>nums.length/3){
+                ans.add(e.getKey());
             }
         }
         
-        Set<Integer> keys=map.keySet();
         
-        for(int key:keys){
-            if(map.get(key)>(nums.length)/3){
-                ans.add(key);
-            }
-        }
         
         return ans;
     }

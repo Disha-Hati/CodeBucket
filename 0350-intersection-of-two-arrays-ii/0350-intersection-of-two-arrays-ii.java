@@ -8,9 +8,10 @@ class Solution {
         }
         
         for(int val:nums2){
-            if(map.containsKey(val) && map.get(val)>0){
+            if(map.containsKey(val)){
                 list.add(val);
                 map.put(val,map.get(val)-1);
+                map.remove(val,0);//removes if zero
             }
            
         }

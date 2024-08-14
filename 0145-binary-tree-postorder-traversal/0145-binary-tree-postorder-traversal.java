@@ -15,29 +15,36 @@
  */
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> ans=new ArrayList<>();
-        
-        if(root==null)  return ans;
-        
-        Stack<TreeNode> s1=new Stack<>();
-        Stack<TreeNode> s2=new Stack<>();
-        s1.push(root);
-        
-        while(!s1.isEmpty()){
-            TreeNode curr=s1.pop();
-            s2.push(curr);
-            
-            if(curr.left!=null) s1.push(curr.left);
-            if(curr.right!=null) s1.push(curr.right);
+       List<Integer> ans = new ArrayList<>();
+        if (root == null) return ans;
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+        TreeNode lastVisited = null;
+
+        while (curr != null || !stack.isEmpty()) {
+            // Go to the leftmost node
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+
+            // Peek the node on the top of the stack
+            curr = stack.peek();
+
+            // If the right subtree is not yet processed, go to the right
+            if (curr.right != null && curr.right != lastVisited) {
+                curr = curr.right;
+            } else {
+                // If the right subtree is already processed or there's no right subtree
+                stack.pop();
+                ans.add(curr.val);
+                lastVisited = curr;
+                curr = null; // Mark the node as processed
+            }
         }
-        
-        while(!s2.isEmpty()){
-            ans.add(s2.pop().val);
-        }
-        
-        
-        
-        
+
         return ans;
+
     }
 }

@@ -14,7 +14,9 @@
  * }
  */
 class Solution {
-   private int diam = 0;  // Use an instance variable to store the diameter
+   private int diam = 0;  // Use an instance variable to store the diameter in Java variables are passed by value
+    //arrays are pass by reference
+    
     
     public int diameterOfBinaryTree(TreeNode root) {
         height(root);  // Calculate height and update diameter

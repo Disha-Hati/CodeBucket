@@ -1,14 +1,11 @@
 class Solution {
     public boolean check(int[] nums) {
-        int count=0;
+        int peak=0;
+        
         for(int i=0;i<nums.length;i++){
-            if(nums[i]>nums[(i+1)%nums.length]){
-                count++;
-            }
+            if(nums[i]>nums[(i+1)%nums.length]) peak++;
         }
         
-        
-        
-        return count<=1;
+        return peak<=1;
     }
 }

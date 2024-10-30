@@ -12,9 +12,7 @@
 public class Solution {
     public boolean hasCycle(ListNode head) {
         
-        if(head==null){
-            return false;
-        }
+        if(head==null) return false;
         
         ListNode hare=head;
         ListNode turtle=head;
@@ -23,11 +21,9 @@ public class Solution {
             hare=hare.next.next;
             turtle=turtle.next;
             
-            if(hare==turtle){
-                return true;
-            }
+            if(hare==turtle)  return true;
         }
-        return false;
         
+        return false;
     }
 }

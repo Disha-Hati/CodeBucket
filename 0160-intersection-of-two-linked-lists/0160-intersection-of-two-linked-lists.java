@@ -11,7 +11,7 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-       Set nodeVisit = new HashSet<>();
+       Set<ListNode> nodeVisit = new HashSet<>();
 
         ListNode curr1=headA;
         ListNode curr2=headB;

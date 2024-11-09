@@ -1,28 +1,27 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> list=new ArrayList<>();
-        List<Integer> ans=new ArrayList<>();
-        combi(0,candidates,target,list,ans);
+        List<List<Integer>> result= new ArrayList<>();
+        List<Integer> currCombi=new ArrayList<>();
         
-        return list;
+        functionCombi(0,target,currCombi,candidates,result);
+        
+        return result;
     }
     
-    public void combi(int index,int[] candidates, int target,List<List<Integer>> list,List<Integer> ans){
+    public void functionCombi(int index,int target,List<Integer> currCombi,int[] candidates,List<List<Integer>> result ){
         if(index==candidates.length){
+            if(target==0){
+                result.add(new ArrayList<>(currCombi));
+            }
             return;
         }
-        
-        if(target==0){
-            list.add(new ArrayList<>(ans));
-            return;
-        }
-        
         
         if(candidates[index]<=target){
-           ans.add (candidates[index]);
-            combi(index,candidates,target-candidates[index],list,ans);
-            ans.remove(ans.size() - 1);
+            currCombi.add(candidates[index]);
+            functionCombi(index,target-candidates[index],currCombi,candidates,result);
+            currCombi.remove(currCombi.size()-1);
         }
-        combi(index+1,candidates,target,list,ans);
+        
+        functionCombi(index+1,target,currCombi,candidates,result);
     }
 }

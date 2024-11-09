@@ -1,26 +1,28 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> list=new ArrayList<>();
-        List<Integer> ans=new ArrayList<>();
+        List<List<Integer>> result=new ArrayList<>();
+        List<Integer> curr=new ArrayList<>();
         Arrays.sort(candidates);
-        combi(0,candidates,target,list,ans);
         
-        return list;
+        funcCombi(0,target,curr,candidates,result);
+        
+        
+        return result;
     }
     
-    public void combi(int index,int[] candidates, int target,List<List<Integer>> list,List<Integer> ans){
-       if(target==0){
-            list.add(new ArrayList<>(ans));
-            return;
+    public void funcCombi(int index,int target,List<Integer> curr,int[] candidates,List<List<Integer>> result){
+        if(target==0){
+            result.add(new ArrayList<>(curr));
         }
         
-         for (int i = index; i < candidates.length; i++) {
-            if (i > index && candidates[i] == candidates[i - 1]) continue; // Skip duplicates
-            if (candidates[i] > target) break; // No need to continue if the candidate is greater than the target
+        for(int i=index;i<candidates.length;i++){
+           if(candidates[i]>target) break;
             
-            ans.add(candidates[i]);
-            combi(i + 1, candidates, target - candidates[i], list, ans); // Move to the next index
-            ans.remove(ans.size() - 1);
+             if(i>index && candidates[i]==candidates[i-1]) continue;
+            curr.add(candidates[i]);
+            funcCombi(i+1,target-candidates[i],curr,candidates,result);
+            curr.remove(curr.size()-1);
+            
         }
     }
 }

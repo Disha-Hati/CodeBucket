@@ -1,71 +1,65 @@
 class Solution {
     public List<List<String>> solveNQueens(int n) {
-        List<List<String>> boardAns=new ArrayList<>();
+        List<List<String>> ans=new ArrayList<>();
         
-        char[][] board=new char[n][n];
+        char[][] myBoard=new char[n][n];
         
-        helper(boardAns,board,0);
+        solve(myBoard,n,ans,0);
         
-        return boardAns;
+        return ans;
     }
     
-    public void helper(List<List<String>> boardAns,char[][] board,int col){
-        if(col==board.length){
-            saveBoard(board,boardAns);
+    public void solve(char[][] myBoard,int n,List<List<String>> ans,int col){
+        if(col==n){
+            saveBoard(ans,myBoard);
             return;
         }
         
-        for(int row=0;row<board.length;row++){
-            if(isSafe(row,col,board)){
-                board[row][col]='Q';
-                helper(boardAns,board,col+1);
-                board[row][col]='.';
+        for(int row=0;row<n;row++){
+            if(isSafe(myBoard,col,row)){
+                myBoard[row][col]='Q';
+                solve(myBoard,n,ans,col+1);
+                myBoard[row][col]='.';
             }
         }
     }
     
-    public boolean isSafe(int row,int col,char[][] board ){
+    public boolean isSafe(char[][] myBoard,int col,int row){
+        //vertcal
+        for(int i=0;i<myBoard.length;i++){
+            if(myBoard[i][col]=='Q') return false;
+        }
+        
         //horizontal
-        for(int i=0;i<board.length;i++){
-            if(board[row][i]=='Q') return false;
+        for(int i=0;i<myBoard.length;i++){
+            if(myBoard[row][i]=='Q') return false;
         }
         
-        //vertical
-        for(int i=0;i<board.length;i++){
-            if(board[i][col]=='Q') return false;
+        // Check upper-left diagonal
+        for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+            if (myBoard[i][j] == 'Q') return false;
         }
         
-        //upper-left
-        for(int r=row,c=col; r>=0 && c>=0 ; r--,c--){
-            if(board[r][c]=='Q') return false;
+        // Check lower-left diagonal
+        for (int i = row, j = col; i < myBoard.length && j >= 0; i++, j--) {
+            if (myBoard[i][j] == 'Q') return false;
         }
-        
-        //botton-left
-        for(int r=row,c=col; r<board.length && c>=0 ; r++,c--){
-            if(board[r][c]=='Q') return false;
-        }
-        
+                
         return true;
     }
     
-    public void saveBoard(char[][] board,List<List<String>> boardAns){
-        String row="";
+    public void saveBoard(List<List<String>> ans,char[][] myBoard){
         List<String> newBoard=new ArrayList<>();
+        String row="";
         
-        for(int i=0;i<board.length;i++){
+        for(int i=0;i<myBoard.length;i++){
             row="";
-            for(int j=0;j<board[i].length;j++){
-                if(board[i][j]=='Q'){
-                    row+='Q';
-                }else{
-                    row+='.';
-                }
-                
+            for(int j=0;j<myBoard[0].length;j++){
+                if(myBoard[i][j]=='Q') row+="Q";
+                else row+=".";
             }
-            
             newBoard.add(row);
         }
-        
-        boardAns.add(newBoard);
+        ans.add(newBoard);
     }
 }
